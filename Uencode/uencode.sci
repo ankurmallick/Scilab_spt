@@ -39,9 +39,9 @@ function y=uencode(u,n,v,signflag)
         error('Incorrect number of input arguments.');
     elseif(signflag~='signed'&signflag~='unsigned')
         error('Sign flag must be signed or unsigned');
-    elseif(size(v)>1|abs(v)~=v)
+    elseif(~isscalar(v)|abs(v)~=v)
         error('Peak value must be a positive real scalar');
-    elseif(size(n)>1|round(n)~=n|n<2|n>32)
+    elseif(~isscalar(n)|round(n)~=n|n<2|n>32)
         error('n must be an integer between 2 and 32')
     else
         y=zeros(u);

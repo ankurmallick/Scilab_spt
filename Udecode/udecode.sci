@@ -39,9 +39,9 @@ function y=udecode(u,n,v,saturatemode)
         error('Incorrect number of input arguments.');
     elseif(saturatemode~='saturate'&saturatemode~='wrap')
         error('Saturate mode must be saturate or wrap');
-    elseif(size(v)>1|abs(v)~=v)
+    elseif(~isscalar(v)|abs(v)~=v)
         error('Peak value must be a positive real scalar');
-    elseif(size(n)>1|round(n)~=n|n<2|n>32)
+    elseif(~isscalar(n)|round(n)~=n|n<2|n>32)
         error('n must be an integer between 2 and 32')
     elseif(type(u)~=8)
         error('Input value must be an integer');
