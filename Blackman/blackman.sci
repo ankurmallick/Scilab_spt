@@ -23,6 +23,8 @@ function w=blackman(N,sflag)
 //  - 1.388D-17  
 //Author
 //Ankur Mallick
+//References
+//[1] Oppenheim, Alan V., Ronald W. Schafer, and John R. Buck. Discrete-Time Signal Processing. Upper Saddle River, NJ: Prentice Hall, 1999.
     if(argn(2)<2)
         sflag='symmetric'; //Default
     end
@@ -40,7 +42,7 @@ function w=blackman(N,sflag)
             N=N+1;
             flag=1;
         end
-        if(pmodulo(N,2)=1)
+        if(pmodulo(N,2)==1)
             M=(N+1)/2; //odd
         else
             M=N/2; //even
