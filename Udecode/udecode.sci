@@ -26,9 +26,11 @@ function y=udecode(u,n,v,saturatemode)
 //  - 0.25    0.25    0.5  - 1.  
 //Author
 //Ankur Mallick
+//[1] International Telecommunication Union. General Aspects of Digital Transmission Systems: Vocabulary of Digital Transmission and Multiplexing, and Pulse Code Modulation (PCM) Terms. ITU-T Recommendation G.701. March, 1993.
 //See also
 //uencode
 //floor
+//Re
     if(argn(2)<4)
         saturatemode='saturate';
         if(argn(2)<3)

@@ -26,6 +26,8 @@ function y=uencode(u,n,v,signflag)
 //  0  2  4  6  7 
 //Author
 //Ankur Mallick
+//References
+//[1] International Telecommunication Union. General Aspects of Digital Transmission Systems: Vocabulary of Digital Transmission and Multiplexing, and Pulse Code Modulation (PCM) Terms. ITU-T Recommendation G.701. March, 1993.
 //See also
 //udecode
 //floor
