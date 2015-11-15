@@ -19,6 +19,7 @@ function w=bartlett(L)
 //Ankur Mallick
 //References
 //[1] Oppenheim, Alan V., Ronald W. Schafer, and John R. Buck. Discrete-Time Signal Processing. Upper Saddle River, NJ: Prentice Hall, 1999.
+    funcprot(0);
     if(argn(2)~=1)
         error('Incorrect number of input arguments.');
     elseif(~isscalar(L)|L<=0|round(L)~=L)

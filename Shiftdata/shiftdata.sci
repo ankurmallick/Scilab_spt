@@ -57,6 +57,7 @@ function [y,perm,nshifts] = shiftdata(x,dim)
 //unshiftdata
 //Author
 //Ankur Mallick
+    funcprot(0);
     if(argn(2)<1|argn(2)>2)
         error('Incorrect number of input arguments.');
     elseif(argn(2)==1|size(dim)==0)

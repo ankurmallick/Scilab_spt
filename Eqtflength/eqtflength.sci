@@ -40,6 +40,7 @@ function [b,a,N,M] = eqtflength(b,a)
 //    1.    2.    3.
 //Author
 //Ankur Mallick
+    funcprot(0);
     if(argn(2)~=2)
         error('Incorrect number of input arguments');
     elseif(length(a)==0|max(abs(a))==0)

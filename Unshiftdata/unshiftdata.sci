@@ -65,6 +65,7 @@ function y = unshiftdata(x,perm,nshifts)
 //shiftdata
 //Author
 //Ankur Mallick
+    funcprot(0);
     if(argn(2)<1|argn(2)<2|(argn(2)<3&size(perm)==0)|argn(2)>3)
         error('Incorrect number of input arguments.');
     else
@@ -72,11 +73,6 @@ function y = unshiftdata(x,perm,nshifts)
             S=size(x);
             S1=[ones(1,nshifts),S]
             y=matrix(x,S1);
-            //            P1=1:1:length(S);
-            //            dim=nshifts+1;
-            //            perm=1:1:length(S);
-            //            perm(dim)=[];
-            //            perm=[dim perm];
         else
             y=permute(x,perm);
         end
