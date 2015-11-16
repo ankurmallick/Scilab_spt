@@ -74,7 +74,8 @@ function y = unshiftdata(x,perm,nshifts)
             S1=[ones(1,nshifts),S]
             y=matrix(x,S1);
         else
-            y=permute(x,perm);
+            iperm(perm)=1:length(perm);
+            y=permute(x,iperm);
         end
     end
 endfunction
