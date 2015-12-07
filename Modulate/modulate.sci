@@ -102,7 +102,7 @@ function [y,t]=modulate(x,fc,fs,method,opt)
                 end
                 S=sum(abs(size(opt)-size(x))); //S=0 only if opt and x have the same size
                 if(S==0)
-                    y = x.*cos(2*pi*fc*t) + opt.*sin(2*pi*fc*t)
+                    y = x.*cos(2*%pi*fc*t) + opt.*sin(2*%pi*fc*t)
                 else
                     error('For qam input signals must be the same size') 
                 end
