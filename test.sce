@@ -1,120 +1,86 @@
-function Y = goertzel(X,INDVEC,DIM)
-%GOERTZEL Second-order Goertzel algorithm.  
-%   GOERTZEL(X,INDVEC) computes the discrete Fourier transform (DFT)
-%   of X at indices contained in the vector INDVEC, using the
-%   second-order Goertzel algorithm.  The indices must be integer values
-%   from 1 to N where N is the length of the first non-singleton dimension.
-%   If empty or omitted, INDVEC is assumed to be 1:N.
+function c = sos2cell(s,g)
+%SOS2CELL Convert second-order-section matrix to cell array.
+%   C = SOS2CELL(S) converts L-by-6 second-order-section matrix S 
+%   in the form
 %
-%   GOERTZEL(X,[],DIM) or GOERTZEL(X,INDVEC,DIM) computes the DFT along 
-%   the dimension DIM.
+%        S =   [B1 A1
+%               B2 A2
+%                ...
+%               BL AL]
 %
-%   In general, GOERTZEL is slower than FFT when computing all the possible
-%   DFT indices, but is most useful when X is a long vector and the DFT 
-%   computation is required for only a subset of indices less than
-%   log2(length(X)).  Indices 1:length(X) correspond to the frequency span
-%   [0, 2*pi) radians.
+%   to a cell array C in the form
 %
-%   EXAMPLE:
-%      % Resolve the 1.24 kHz and 1.26 kHz components in the following
-%      % noisy cosine which also has a 10 kHz component.
-%      Fs = 32e3;   t = 0:1/Fs:2.96;
-%      x  = cos(2*pi*t*10e3)+cos(2*pi*t*1.24e3)+cos(2*pi*t*1.26e3)...
-%           + randn(size(t));
+%     C = { {B1,A1}, {B2,A2}, ... {BL,AL} }
 %
-%      N = (length(x)+1)/2;
-%      f = (Fs/2)/N*(0:N-1);              % Generate frequency vector
-%      indxs = find(f>1.2e3 & f<1.3e3);   % Find frequencies of interest
-%      X = goertzel(x,indxs);
-%      
-%      hms = dspdata.msspectrum((abs(X)/length(X)).^2,f(indxs),'Fs',Fs);
-%      plot(hms);                          % Plot the mean-square spectrum.
+%   where each numerator vector Bi and denominator vector Ai represents the
+%   coefficients of a linear or quadratic polynomial. 
 %
-%   See also FFT, FFT2.
+%   C = SOS2CELL(S,G) with an additional gain term prepends a constant term to C
+%   in the form
+%
+%     C = { {G,1}, {B1,A1}, {B2,A2}, ... {BL,AL} }
+%
+%   Example:
+%     [b,a] = butter(4,.5);
+%     [s,g] = tf2sos(b,a);
+%     c = sos2cell(s,g)
+%
+%   See also CELL2SOS, TF2SOS, SOS2TF, ZP2SOS, SOS2ZP, SOS2SS, SS2SOS.
 
-%   Author: P. Costa
-%   Copyright 1988-2011 The MathWorks, Inc.
-%     
+%   Thomas A. Bryan
+%   Copyright 1988-2004 The MathWorks, Inc.
 
-%   Reference:
-%     C.S.Burrus and T.W.Parks, DFT/FFT and Convolution Algorithms, 
-%     John Wiley & Sons, 1985
-
-if ~(exist('goertzelmex', 'file') == 3), 
-	error(message('signal:goertzel:NotSupported'));
+if nargin<2
+  g = [];
 end
 
-error(nargchk(1,3,nargin,'struct'));
-if nargin < 2, INDVEC = []; end
-if nargin < 3, DIM = []; end
-
-% Inputs should all be of class 'double'
-checkdatatype('double',X,INDVEC,DIM);
-
-if ~isempty(DIM) && DIM > ndims(X)
-	error(message('signal:goertzel:InvalidDimensions'))
+if ~isempty(g) && g == 1;
+    % Assume there is no g if the gain is 1
+    g = [];
 end
 
-% Reshape X into the right dimension.
-if isempty(DIM)
-	% Work along the first non-singleton dimension
-	[X, nshifts] = shiftdim(X);
+if ~isnumeric(s) || ndims(s)~=2 || size(s,2)~=6,
+   error(message('signal:sos2cell:InvalidDimensions'))
+end
+m = size(s, 1);
+
+% If we have a single-section with [1 0 0 1 0 0], recombine the gain
+if m == 1 && ~isempty(g) && ~any((s==[1 0 0 1 0 0]) ~= 1) ,
+    s(1) = g*s(1);
+    g = [];
+end
+
+isg = ~isempty(g);
+c = cell(1,m+isg); % m for S plus 1 for g if not empty
+if isg
+  c{1} = {g,1};
+end
+for i=1:m
+  % Assign cells after removing trailing zeros
+  c{i+isg}={dezero(s(i,1:3)), dezero(s(i,4:6))};
+end
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%
+function x1 = dezero(x)
+%DEZERO Remove trailing zeros.
+%   DEZERO(X) removes trailing zeros from numeric vector X.
+%
+
+%   Modified from DEBLANK
+
+if ~isempty(x) && ~isnumeric(x) && ~isvector(x)
+    warning(message('signal:sos2cell:InvalidParam'))
+end
+
+if isempty(x)
+    x1 = x([]);
 else
-	% Put DIM in the first dimension (this matches the order 
-	% that the built-in filter function uses)
-	perm = [DIM,1:DIM-1,DIM+1:ndims(X)];
-	X = permute(X,perm);
-end
-
-% Verify that the indices in INDVEC are valid.
-siz = size(X);
-if isempty(INDVEC),
-	INDVEC = 1:siz(1); % siz(1) is the number of rows of X
-else
-	INDVEC = INDVEC(:);
-	if max(INDVEC) > siz(1),
-		error(message('signal:goertzel:IdxGtBound'));
-	elseif min(INDVEC) < 1
-		error(message('signal:goertzel:IdxLtBound'));
-	elseif all(INDVEC-fix(INDVEC))
-		error(message('signal:goertzel:MustBeInteger'));
-	end
-end
-
-% Initialize Y with the correct dimension
-Y = zeros([length(INDVEC),siz(2:end)]); 
-
-% Call goertzelmex 
-for k = 1:prod(siz(2:end)),
-	Y(:,k) = goertzelmex(X(:,k),INDVEC);
-end
-
-% Convert Y to the original shape of X
-if isempty(DIM)
-	Y = shiftdim(Y, -nshifts);
-else
-	Y = ipermute(Y,perm);
-end
-
-
-%-------------------------------------------------------------------
-%                       Utility Function
-%-------------------------------------------------------------------
-function msg = checkdatatype(cname,varargin)
-%CHECKDATATYPE Check data type class
-%   Checks for exact match on class, subclasses don't count.  i.e.,
-%   sparse will not be a double, even though isa(sparse(2),'double')
-%   evaluates to true.
-%
-% Inputs:
-%   cname    - Class name
-%   varargin - Inputs to check
-
-msg = '';
-for k=1:length(varargin),
-  if ~strcmpi(class(varargin{k}),cname)
-    error(message('signal:goertzel:InvalidDataType', 'Function ''goertzel'' is not defined for variables of class ''', class( varargin{ k } ), ''''));
+  % remove trailing zeros
+  [r,c] = find(x ~= 0); %#ok
+  if isempty(c)
+    x1 = x([]);
+  else
+    x1 = x(1:max(c));
   end
 end
-
-% [EOF] goertzel.m
+ 
