@@ -48,15 +48,17 @@ function y=udecode(u,n,v,saturatemode)
     elseif(type(u)~=8)
         error('Input value must be an integer');
     else
-        if(sum(u-abs(u))~=0)
+        if(inttype(u)==1|inttype(u)==2|inttype(u)==4)
             u=u+2^(n-1);   //Converting signed to unsigned
         end
         if(saturatemode=='wrap')
             u=pmodulo(double(u),2^n);
         end
+        u(u<0)=0;
+        u(u>(2^n-1))=2^n-1;
         L=2*v/(2^n);
         y=L*double(u)-v;
-        y(y<-v)=-v;
-        y(y>v)=v;
+//        y(y<-v)=-v;
+//        y(y>v)=v;
     end
 endfunction
