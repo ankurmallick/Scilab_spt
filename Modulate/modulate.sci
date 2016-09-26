@@ -55,7 +55,7 @@ function [y,t]=modulate(x,fc,fs,method,opt)
     funcprot(0);
     if (argn(2)<3|argn(2)>5) then
         error('Incorrect number of input arguments.');
-    elseif (fc>fs/2)
+    elseif (isreal(fc)&isreal(fs)&fc>fs/2)
         error('The career frequency must be less than half the sampling frequency.')
     else
         flag1=0;
@@ -73,7 +73,7 @@ function [y,t]=modulate(x,fc,fs,method,opt)
         t=t*ones(1,N);
         if(method=='am'|method=='amdsb-sc')
             y=x.*cos(2*%pi*fc*t);
-        elseif(method=='amsb-tc')
+        elseif(method=='amdsb-tc')
             if(argn(2)<5)
                 opt=min(min(x));
             end
@@ -84,10 +84,10 @@ function [y,t]=modulate(x,fc,fs,method,opt)
             if(argn(2)<5)
                 opt=max(abs(x(:))); //if all elements of x are zero
                 if(opt>0)
-                    opt=(fc/fs)*2*pi/opt;
+                    opt=(fc/fs)*2*%pi/opt;
                 end
             end
-            y=cos(2*%pi*fc*t + opt*cumsum(x));
+            y=cos(2*%pi*fc*t + opt*cumsum(x,1));
         elseif(method=='pm')
             if(argn(2)<5)
                 opt=%pi/(max(abs(x(:))));
@@ -176,7 +176,7 @@ function [y,t]=modulate(x,fc,fs,method,opt)
             t=t(:,1); //only first column required
             if(flag1==1)
                 //x is a row vector
-                y=y';
+                y=conj(y');
                 t=t';
             end
         end
