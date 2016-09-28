@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
+<map version="1.0">
+<mapID target="index" url="index.html"/>
+<mapID target="section_90f6627f285223fba8cc5e235192c6f3" url="section_90f6627f285223fba8cc5e235192c6f3.html"/>
+<mapID target="bartlett" url="bartlett.html"/>
+<mapID target="blackman" url="blackman.html"/>
+<mapID target="cell2sos" url="cell2sos.html"/>
+<mapID target="db" url="db.html"/>
+<mapID target="eqtflength" url="eqtflength.html"/>
+<mapID target="goertzel" url="goertzel.html"/>
+<mapID target="modulate" url="modulate.html"/>
+<mapID target="seqperiod" url="seqperiod.html"/>
+<mapID target="shiftdata" url="shiftdata.html"/>
+<mapID target="sos2cell" url="sos2cell.html"/>
+<mapID target="strips" url="strips.html"/>
+<mapID target="udecode" url="udecode.html"/>
+<mapID target="uencode" url="uencode.html"/>
+<mapID target="unshiftdata" url="unshiftdata.html"/>
+<mapID target="vco" url="vco.html"/>
+</map>

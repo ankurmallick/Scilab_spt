@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!--Begin Entities-->
+<!ENTITY a6e71d3c878b110b970b093822b353310 SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/bartlett.xml">
+<!ENTITY a5f493936370dfa2dabe95ba9c86c9eb3 SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/blackman.xml">
+<!ENTITY a2e30d455366c6337e48f793a5aad9d6e SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/cell2sos.xml">
+<!ENTITY a20146204eaa6d5c2e6f9e35f0c4134bf SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/db.xml">
+<!ENTITY a31a797334b4f6f36243b3d674fb8654a SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/eqtflength.xml">
+<!ENTITY aa4a1ea4e418f47f324f3af99eda57ebe SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/goertzel.xml">
+<!ENTITY aa654d1a9fb72858a0c84d729bcebd23b SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/modulate.xml">
+<!ENTITY af307afaaab3059d738198ecddd02f953 SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/seqperiod.xml">
+<!ENTITY a776eb01e9d3179ff7e1889e71189544a SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/shiftdata.xml">
+<!ENTITY ab3d2ab6853eb894a7f23762b8d09e0cd SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/sos2cell.xml">
+<!ENTITY a4c7022ee33597272bf7c8d37301fcccb SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/strips.xml">
+<!ENTITY a19566d47a451b333a21f728f7a3dd78b SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/udecode.xml">
+<!ENTITY ac84a9ed671756fe5f87608d0924a3823 SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/uencode.xml">
+<!ENTITY aa4aac94722d728646bf2b0fbe0bb846c SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/unshiftdata.xml">
+<!ENTITY a01b9bdca842ac3447104efa9f5e0b8fc SYSTEM "/Users/ankurmallick/Documents/My Documents/Scilab/Macros/toolboxHelp/vco.xml">
+<!--End Entities-->
+]>
+<book version="5.0-subset Scilab" xml:lang="toolboxHelp"
+      xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:mml="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info xml:id='signal_processing_toolbox_manual'>
+    <title>Signal Processing Toolbox</title>
+  </info>
+
+<part xml:id='section_90f6627f285223fba8cc5e235192c6f3'>
+<title>Signal Processing Toolbox</title>
+&a6e71d3c878b110b970b093822b353310;
+&a5f493936370dfa2dabe95ba9c86c9eb3;
+&a2e30d455366c6337e48f793a5aad9d6e;
+&a20146204eaa6d5c2e6f9e35f0c4134bf;
+&a31a797334b4f6f36243b3d674fb8654a;
+&aa4a1ea4e418f47f324f3af99eda57ebe;
+&aa654d1a9fb72858a0c84d729bcebd23b;
+&af307afaaab3059d738198ecddd02f953;
+&a776eb01e9d3179ff7e1889e71189544a;
+&ab3d2ab6853eb894a7f23762b8d09e0cd;
+&a4c7022ee33597272bf7c8d37301fcccb;
+&a19566d47a451b333a21f728f7a3dd78b;
+&ac84a9ed671756fe5f87608d0924a3823;
+&aa4aac94722d728646bf2b0fbe0bb846c;
+&a01b9bdca842ac3447104efa9f5e0b8fc;
+</part>
+</book>

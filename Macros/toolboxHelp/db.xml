@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * This help file was generated from db.sci using help_from_sci().
+ *
+ -->
+
+<refentry version="5.0-subset Scilab" xml:id="db" xml:lang="en"
+          xmlns="http://docbook.org/ns/docbook"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          xmlns:ns3="http://www.w3.org/1999/xhtml"
+          xmlns:mml="http://www.w3.org/1998/Math/MathML"
+          xmlns:scilab="http://www.scilab.org"
+          xmlns:db="http://docbook.org/ns/docbook">
+
+  <refnamediv>
+    <refname>db</refname>
+    <refpurpose>Modifies the input vector to give output vectors of the same length</refpurpose>
+  </refnamediv>
+
+
+<refsynopsisdiv>
+   <title>Calling Sequence</title>
+   <synopsis>
+   Y = db(X)
+   Y = db(X,SignalType)
+   Y = db(X,'Voltage',R)
+   Y = db(X,R)
+   </synopsis>
+</refsynopsisdiv>
+
+<refsection>
+   <title>Parameters</title>
+   <variablelist>
+   <varlistentry><term>X:</term>
+      <listitem><para> Vector matrix or n-dimensional array (Input voltage or power signal)</para></listitem></varlistentry>
+   <varlistentry><term>U:</term>
+      <listitem><para> Input signal type ('Voltage' or 'Power')</para></listitem></varlistentry>
+   <varlistentry><term>R:</term>
+      <listitem><para> Resistance load</para></listitem></varlistentry>
+   </variablelist>
+</refsection>
+
+<refsection>
+   <title>Description</title>
+   <para>
+Y=db(X)
+Converts the elements of X (assumed to be a voltage signal across a resistance
+of 1 ohm) to decibels
+Y=db(X,SignalType)
+Specifies the SignalType of X as 'Voltage' or 'Power' (not case sensitive)
+If type is 'Voltage' the resistance is assumed to be 1 ohm
+If type is 'Power' the elements of X must be non-negative (resistance not used)
+Y=db(X,'Voltage','R') or Y=db(X,R)
+Conversts the elements of voltage signal X across a resistance of R ohm to decibels
+</para>
+</refsection>
+
+<refsection>
+   <title>Examples</title>
+   <programlisting role="example"><![CDATA[
+X=rand(1,5)
+X  =
+
+0.2113249    0.7560439    0.0002211    0.3303271    0.6653811
+Y=db(X))
+Y  =
+
+- 13.500988  - 2.4290603  - 73.106865  - 9.6211161  - 3.5385907
+   ]]></programlisting>
+</refsection>
+
+<refsection>
+   <title>Authors</title>
+   <simplelist type="vert">
+   <member>Ankur Mallick</member>
+   </simplelist>
+</refsection>
+</refentry>

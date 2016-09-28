@@ -1,0 +1,122 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>cell2sos</title>
+    <style type="text/css" media="all">
+      @import url("scilab_code.css");
+      @import url("xml_code.css");
+      @import url("c_code.css");
+      @import url("style.css");
+    </style>
+  </head>
+  <body>
+    <div class="manualnavbar">
+    <table width="100%"><tr>
+      <td width="30%">
+    	<span class="previous"><a href="blackman.html">&lt;&lt; blackman</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_90f6627f285223fba8cc5e235192c6f3.html">Signal Processing Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="db.html">db &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+
+
+
+    <span class="path"><a href="index.html">Signal Processing Toolbox</a> &gt;&gt; <a href="section_90f6627f285223fba8cc5e235192c6f3.html">Signal Processing Toolbox</a> &gt; cell2sos</span>
+
+    <br /><br />
+    <div class="refnamediv"><h1 class="refname">cell2sos</h1>
+    <p class="refpurpose">Converts a cell array to a second order section matrix</p></div>
+
+
+<div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+   <div class="synopsis"><pre><span class="default">s</span><span class="default">=</span><span class="functionid">cell2sos</span><span class="default">(</span><span class="default">c</span><span class="default">)</span>
+<span class="default">[</span><span class="default">s</span><span class="default">,</span><span class="default">g</span><span class="default">]=</span><span class="functionid">cell2sos</span><span class="default">(</span><span class="default">c</span><span class="default">)</span></pre></div></div>
+
+<div class="refsection"><h3 class="title">Parameters</h3>
+   <dl><dt><span class="term">c:</span>
+      <dd><p class="para">A cell array</p></dd></dt></dl></div>
+
+<div class="refsection"><h3 class="title">Description</h3>
+   <p class="para">s=cell2sos(c) converts a a cell array c = { {B1},{A1}, {B2},{A2}, ... {BL},{AL}}
+to an L-by-6 second-order-section matrix s given by:
+s =   [B1 A1
+B2 A2
+...
+BL AL]
+numerator vector Bi and denominator vector Ai contains the coefficients of a
+linear or quadratic polynomial. If the polynomial is linear, the coefficients
+zero-padded on the right.
+[s,g]=cell2sos(c) estimates the gain from the leading term of the cell array
+c={ {[g1,g2]},{B1},{A1}, {B2},{A2}, ... {BL},{AL}} to give g=g1/g2 as the gain</p></div>
+
+<div class="refsection"><h3 class="title">Examples</h3>
+   <div class="programlisting"><table border="0" width="100%"><tr><td width="98%"><pre class="scilabcode"><span class="scilabid">c</span><span class="scilaboperator">=</span><a class="scilabmacro" href="scilab://cell">cell</a><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">5</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">1</span><span class="scilabopenclose">)</span><span class="scilaboperator">.</span><span class="scilabfield">entries</span><span class="scilaboperator">=</span><span class="scilabopenclose">[</span><span class="scilabnumber">2</span><span class="scilabdefault">,</span> <span class="scilabnumber">1</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">2</span><span class="scilabopenclose">)</span><span class="scilaboperator">.</span><span class="scilabfield">entries</span><span class="scilaboperator">=</span><a class="scilabcommand" href="scilab://rand">rand</a><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span><span class="scilaboperator">.</span><span class="scilabfield">entries</span><span class="scilaboperator">=</span><a class="scilabcommand" href="scilab://rand">rand</a><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">4</span><span class="scilabopenclose">)</span><span class="scilaboperator">.</span><span class="scilabfield">entries</span><span class="scilaboperator">=</span><a class="scilabcommand" href="scilab://rand">rand</a><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">5</span><span class="scilabopenclose">)</span><span class="scilaboperator">.</span><span class="scilabfield">entries</span><span class="scilaboperator">=</span><a class="scilabcommand" href="scilab://rand">rand</a><span class="scilabopenclose">(</span><span class="scilabnumber">1</span><span class="scilabdefault">,</span><span class="scilabnumber">3</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+
+<span class="scilabid">c</span>  <span class="scilaboperator">=</span>
+<span class="scilabid">column</span> <span class="scilabnumber">1</span> <span class="scilabid">to</span> <span class="scilabnumber">3</span>
+
+<span class="scilabid">!</span><span class="scilabopenclose">[</span><span class="scilabnumber">2</span><span class="scilabdefault">,</span><span class="scilabnumber">1</span><span class="scilabopenclose">]</span>  <span class="scilabopenclose">[</span><span class="scilabnumber">0.2113249</span><span class="scilabdefault">,</span><span class="scilabnumber">0.7560439</span><span class="scilabdefault">,</span><span class="scilabnumber">0.0002211</span><span class="scilabopenclose">]</span>  <span class="scilabopenclose">[</span><span class="scilabnumber">0.3303271</span><span class="scilabdefault">,</span><span class="scilabnumber">0.6653811</span><span class="scilabdefault">,</span><span class="scilabnumber">0.6283918</span><span class="scilabopenclose">]</span>  <span class="scilabid">!</span>
+
+<span class="scilabid">column</span> <span class="scilabnumber">4</span> <span class="scilabid">to</span> <span class="scilabnumber">5</span>
+
+<span class="scilabid">!</span><span class="scilabopenclose">[</span><span class="scilabnumber">0.8497452</span><span class="scilabdefault">,</span><span class="scilabnumber">0.6857310</span><span class="scilabdefault">,</span><span class="scilabnumber">0.8782165</span><span class="scilabopenclose">]</span>  <span class="scilabopenclose">[</span><span class="scilabnumber">0.0683740</span><span class="scilabdefault">,</span><span class="scilabnumber">0.5608486</span><span class="scilabdefault">,</span><span class="scilabnumber">0.6623569</span><span class="scilabopenclose">]</span>  <span class="scilabid">!</span>
+<span class="scilabopenclose">[</span><span class="scilabid">s</span><span class="scilabdefault">,</span><span class="scilabid">g</span><span class="scilabopenclose">]</span><span class="scilaboperator">=</span><span class="scilabid">cell2sos</span><span class="scilabopenclose">(</span><span class="scilabid">c</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">s</span>  <span class="scilaboperator">=</span>
+
+<span class="scilabid">column</span> <span class="scilabnumber">1</span> <span class="scilabid">to</span> <span class="scilabnumber">5</span>
+
+<span class="scilabnumber">0.2113249</span>    <span class="scilabnumber">0.7560439</span>    <span class="scilabnumber">0.0002211</span>    <span class="scilabnumber">0.3303271</span>    <span class="scilabnumber">0.6653811</span>
+<span class="scilabnumber">0.8497452</span>    <span class="scilabnumber">0.6857310</span>    <span class="scilabnumber">0.8782165</span>    <span class="scilabnumber">0.0683740</span>    <span class="scilabnumber">0.5608486</span>
+
+<span class="scilabid">column</span> <span class="scilabnumber">6</span>
+
+<span class="scilabnumber">0.6283918</span>
+<span class="scilabnumber">0.6623569</span>
+
+<span class="scilabid">g</span>  <span class="scilaboperator">=</span>
+
+<span class="scilabnumber">2.</span></pre></td><td valign="top"><a href="scilab://scilab.execexample/"><img src="ScilabExecute.png" border="0"/></a></td><td valign="top"><a href="scilab://scilab.editexample/"><img src="ScilabEdit.png" border="0"/></a></td><td></td></tr></table></div></div>
+
+<div class="refsection"><h3 class="title">Authors</h3>
+   <ul class="itemizedlist"><li class="member">Ankur Mallick</li></ul></div>
+    <br />
+
+    <div class="manualnavbar">
+    <table width="100%">
+    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+      <td width="30%">
+    	<span class="previous"><a href="blackman.html">&lt;&lt; blackman</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_90f6627f285223fba8cc5e235192c6f3.html">Signal Processing Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	<span class="next"><a href="db.html">db &gt;&gt;</a></span>
+
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+  </body>
+</html>
